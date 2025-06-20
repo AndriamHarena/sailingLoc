@@ -124,6 +124,17 @@ export const getBoatById = async (req, res) => {
 export const createBoat = async (req, res) => {
   const { name, type, year, length, capacity, price, isAvailable } = req.body;
   try {
+    // Validation manuelle (en plus du middleware)
+    const errors = [];
+    if (!name) errors.push("Le nom du bateau est requis");
+    if (!type) errors.push("Le type de bateau est requis");
+    if (!year) errors.push("L'année du bateau est requise");
+    
+    // Si des erreurs sont détectées, renvoyer un code 400
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
+    }
+    
     const boat = await prisma.Boat.create({
       data: { 
         name, 
@@ -145,6 +156,10 @@ export const createBoat = async (req, res) => {
     res.status(201).json(boat);
   } catch (error) {
     console.error("Erreur :", error);
+    // Vérifier si c'est une erreur de validation Prisma
+    if (error.code === 'P2002' || error.name === 'ValidationError') {
+      return res.status(400).json({ errors: [error.message] });
+    }
     res.status(500).json({ error: "Erreur lors de la création du bateau" });
   }
 };
