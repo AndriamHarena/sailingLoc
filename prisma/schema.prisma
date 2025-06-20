@@ -1,0 +1,23 @@
+generator client {
+  provider      = "prisma-client-js"
+  //para mi
+  binaryTargets = ["native", "linux-arm64-openssl-1.1.x", "linux-arm64-openssl-3.0.x"]
+}
+
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Boat {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  type        String
+  year        Int
+  length      Float?   
+  capacity    Int?     
+  price       Float?   
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}

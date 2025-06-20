@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js",
+    "start": "node index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.10.1",
+    "express": "^4.21.2",
+    "mongodb": "^6.17.0",
+    "redis": "^5.5.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "node-fetch": "^3.3.2",
+    "prisma": "^6.10.1"
+  },
+  "name": "sailingloc",
+  "version": "1.0.0",
+  "description": "Bienvenue dans **SailingLoc**, une application Node.js/Express utilisant MongoDB et Prisma.  \r Le projet simule un système de gestion de flotte de bateaux pour une plateforme de location.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
